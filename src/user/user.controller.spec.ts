@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { UserDto } from './dtos/user.dto';
 import { JwtAuthGuard } from '../gourds/jwt-auth.gourd';
 import { RolesGuard } from '../gourds/roles.gourd';
-import { UserStatus } from 'src/types/types';
+import { UserStatus } from '../types/types';
 
 describe('UserController', () => {
   let controller: UserController;

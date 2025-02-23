@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { DataSource } from 'typeorm';
 import { CreateDocumentDto, UpdateDocumentDto } from './dtos/document.dto';
 import { Document } from './entities/document.entity';
-import { APP_CONFIG } from 'src/config/constants';
+import { APP_CONFIG } from '../config/constants';
 
 @Injectable()
 export class DocumentService {
