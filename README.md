@@ -23,6 +23,33 @@ And document management as well so for these requirement I used a nestJS framewo
    git clone https://github.com/VivekMethew/jk-assessment.git
    ```
 
+2. Install All dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Run migration
+
+Migration file are created and we have run the query inside postgres sql editor. and sql must be copy and apply
+
+```bash
+npm run build
+npm run prestart
+```
+
+4. Run Application
+
+```bash
+npm run start:dev
+```
+
+5. Run Test Cases Application
+
+```bash
+npm run test
+```
+
 ## Auth management Features
 
 - Register User
