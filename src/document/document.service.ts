@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { CreateDocumentDto, UpdateDocumentDto } from './dtos/document.dto';
 import { Document } from './entities/document.entity';
+import { APP_CONFIG } from 'src/config/constants';
 
 @Injectable()
 export class DocumentService {
@@ -16,6 +17,9 @@ export class DocumentService {
     document.name = createDocumentDto.name;
     document.description = createDocumentDto.description;
     document.filePath = file.path;
+    document.url = `${APP_CONFIG.BASE_API_URL}/public/files/${file.filename}`;
+
+    console.log(document);
 
     return await this.dataSource.getRepository(Document).save(document);
   }

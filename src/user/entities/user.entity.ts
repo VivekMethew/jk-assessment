@@ -48,7 +48,6 @@ export class User extends BaseEntity {
     userDto.updatedAt = userObj.updatedAt;
     userDto.deletedAt = userObj.deletedAt;
 
-    console.log({ userObj, userDto });
     return userDto;
   }
 }

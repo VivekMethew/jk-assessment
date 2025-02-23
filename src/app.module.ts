@@ -9,9 +9,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LookupModule } from './lookup/lookup.module';
 import { UserRoleModule } from './user_role/user_role.module';
 import { DocumentModule } from './document/document.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public/files'),
+      serveRoot: '/public/files',
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: DB_CONFIG.DIALECT as 'postgres',

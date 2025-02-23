@@ -11,4 +11,7 @@ export class Document extends BaseEntity {
 
   @Column()
   filePath: string;
+
+  @Column({ nullable: true })
+  url: string;
 }

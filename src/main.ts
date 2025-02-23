@@ -22,11 +22,18 @@ async function bootstrap() {
     .setTitle('My API')
     .setDescription('API documentation for my application')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      in: 'header',
+    })
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api-docs', app, document);
+  SwaggerModule.setup('api-docs', app, document, {
+    swaggerOptions: { persistAuthorization: true },
+  });
 
   // Transfer
   app.useGlobalInterceptors(new ResponseInterceptor());

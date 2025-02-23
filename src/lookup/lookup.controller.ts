@@ -8,7 +8,12 @@ import {
 import { LookupService } from './lookup.service';
 import { Roles } from '../decorators/roles.decorator';
 import { UserRole } from '../types/types';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { RoleDto } from './dtos/role.dto';
 import { JwtAuthGuard } from '../gourds/jwt-auth.gourd';
 import { RolesGuard } from '../gourds/roles.gourd';
@@ -16,6 +21,7 @@ import { RolesGuard } from '../gourds/roles.gourd';
 @ApiTags('lookups')
 @Controller('lookups')
 @UseGuards(JwtAuthGuard, RolesGuard)
+@ApiBearerAuth()
 export class LookupController {
   constructor(private readonly service: LookupService) {}
 

@@ -22,4 +22,5 @@ export const JWT_CONFIG = {
 export const APP_CONFIG = {
   ENV: configService.get<string>('NODE_ENV', 'development'),
   PORT: configService.get<number>('APP_PORT', 3000),
+  BASE_API_URL: configService.get<string>('BASE_API_URL'),
 };

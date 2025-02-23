@@ -14,7 +14,8 @@ import {
 import { DocumentService } from './document.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import * as path from 'path';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateDocumentDto, UpdateDocumentDto } from './dtos/document.dto';
 
 @ApiTags('Documents')
@@ -25,12 +26,26 @@ export class DocumentController {
   @Post()
   @ApiOperation({ summary: 'Upload a new document' })
   @HttpCode(HttpStatus.CREATED)
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Document upload',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: { type: 'string', format: 'binary' },
+        name: { type: 'string' },
+        description: { type: 'string' },
+      },
+    },
+  })
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './uploads', // Define the folder where files are stored
+        destination: './public/files',
         filename: (req, file, cb) => {
-          cb(null, `${Date.now()}-${file.originalname}`);
+          const filename = `${Date.now()}-document${path.extname(file.originalname)}`;
+          cb(null, filename);
         },
       }),
     }),
