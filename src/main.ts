@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { APP_CONFIG } from './config/constants';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { JwtAuthGuard } from './gourds/jwt-auth.gourd';
+import { APP_CONFIG } from './config/constants';
+import { ResponseInterceptor } from './interceptions/response.interceptor';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -27,6 +28,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(process.env.PORT ?? 3000);
+  // Transfer
+  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+  await app.listen(APP_CONFIG.PORT);
 }
 bootstrap();

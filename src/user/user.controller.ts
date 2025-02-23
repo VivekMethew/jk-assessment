@@ -9,10 +9,10 @@ import {
 import { UserService } from './user.service';
 import { UserDto } from './dtos/user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/gourds/jwt-auth.gourd';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/gourds/roles.gourd';
-import { UserRole } from 'src/types/types';
+import { JwtAuthGuard } from '../gourds/jwt-auth.gourd';
+import { Roles } from '../decorators/roles.decorator';
+import { RolesGuard } from '../gourds/roles.gourd';
+import { UserRole } from '../types/types';
 
 @ApiTags('users')
 @Controller('users')

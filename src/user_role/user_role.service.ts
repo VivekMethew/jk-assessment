@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserRoles } from 'src/user/entities/user-role.entity';
+import { UserRoles } from '../user/entities/user-role.entity';
 import { DataSource } from 'typeorm';
 import { AssignRoleDto } from './dtos/assign-role.dto';
-import { convertIdToObject } from 'src/common/getObject';
-import { User } from 'src/user/entities/user.entity';
-import { Roles } from 'src/lookup/entities/role.entity';
+import { convertIdToObject } from '../common/getObject';
+import { User } from '../user/entities/user.entity';
+import { Roles } from '../lookup/entities/role.entity';
 
 @Injectable()
 export class UserRoleService {

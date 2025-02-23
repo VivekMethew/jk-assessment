@@ -14,12 +14,7 @@ import {
 import { DocumentService } from './document.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateDocumentDto, UpdateDocumentDto } from './dtos/document.dto';
 
 @ApiTags('Documents')

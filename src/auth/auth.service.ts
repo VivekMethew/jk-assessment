@@ -19,14 +19,14 @@ export class AuthService {
     return user;
   }
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<any> {
     const user = await this.validateUser(loginDto.email, loginDto.password);
 
     const payload = { username: user.email, sub: user.id, roles: [] };
     return { user, access_token: this.jwtService.sign(payload) };
   }
 
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: RegisterDto): Promise<any> {
     const userExist = await this.service.findByEmailId(registerDto.email);
 
     if (userExist) {

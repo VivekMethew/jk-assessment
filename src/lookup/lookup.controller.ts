@@ -6,12 +6,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { LookupService } from './lookup.service';
-import { Roles } from 'src/decorators/roles.decorator';
-import { UserRole } from 'src/types/types';
+import { Roles } from '../decorators/roles.decorator';
+import { UserRole } from '../types/types';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RoleDto } from './dtos/role.dto';
-import { JwtAuthGuard } from 'src/gourds/jwt-auth.gourd';
-import { RolesGuard } from 'src/gourds/roles.gourd';
+import { JwtAuthGuard } from '../gourds/jwt-auth.gourd';
+import { RolesGuard } from '../gourds/roles.gourd';
 
 @ApiTags('lookups')
 @Controller('lookups')

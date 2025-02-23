@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { UserRoleService } from './user_role.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/decorators/roles.decorator';
-import { UserRole } from 'src/types/types';
-import { JwtAuthGuard } from 'src/gourds/jwt-auth.gourd';
-import { RolesGuard } from 'src/gourds/roles.gourd';
+import { Roles } from '../decorators/roles.decorator';
+import { UserRole } from '../types/types';
+import { JwtAuthGuard } from '../gourds/jwt-auth.gourd';
+import { RolesGuard } from '../gourds/roles.gourd';
 import { AssignRoleDto } from './dtos/assign-role.dto';
 
 @ApiTags('user-roles')
