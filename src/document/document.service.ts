@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-
+import * as path from 'path';
+import * as fs from 'fs';
 import { DataSource } from 'typeorm';
 import { CreateDocumentDto, UpdateDocumentDto } from './dtos/document.dto';
 import { Document } from './entities/document.entity';
@@ -18,8 +19,6 @@ export class DocumentService {
     document.description = createDocumentDto.description;
     document.filePath = file.path;
     document.url = `${APP_CONFIG.BASE_API_URL}/public/files/${file.filename}`;
-
-    console.log(document);
 
     return await this.dataSource.getRepository(Document).save(document);
   }
@@ -41,18 +40,53 @@ export class DocumentService {
   async updateDocument(
     id: string,
     updateDocumentDto: UpdateDocumentDto,
+    file: Express.Multer.File,
   ): Promise<Document> {
+    const response = await this.getDocumentById(id);
+
+    const existingFilePath = path.join(
+      __dirname,
+      '..',
+      '..',
+      response.filePath,
+    );
+
+    if (fs.existsSync(existingFilePath)) {
+      fs.unlinkSync(existingFilePath);
+      console.log('old file successfully deleted');
+    }
+
+    const document = new Document();
+    document.name = updateDocumentDto?.name || '';
+    document.description = updateDocumentDto?.description || '';
+    document.filePath = file.path;
+    document.url = `${APP_CONFIG.BASE_API_URL}/public/files/${file.filename}`;
+
     const documentRepository = this.dataSource.getRepository(Document);
-    await documentRepository.update(id, updateDocumentDto);
+    await documentRepository.update(id, document);
 
     return this.getDocumentById(id);
   }
 
   async deleteDocument(id: string): Promise<void> {
+    const response = await this.getDocumentById(id);
+
     const documentRepository = this.dataSource.getRepository(Document);
     const result = await documentRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Document with ID ${id} not found`);
+    }
+
+    const existingFilePath = path.join(
+      __dirname,
+      '..',
+      '..',
+      response.filePath,
+    );
+
+    if (fs.existsSync(existingFilePath)) {
+      fs.unlinkSync(existingFilePath);
+      console.log('File successfully deleted');
     }
   }
 }

@@ -71,11 +71,36 @@ export class DocumentController {
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a document' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Update a document',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: { type: 'string', format: 'binary' },
+        name: { type: 'string' },
+        description: { type: 'string' },
+      },
+    },
+  })
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './public/files',
+        filename: (req, file, cb) => {
+          const filename = `${Date.now()}-document${path.extname(file.originalname)}`;
+          cb(null, filename);
+        },
+      }),
+    }),
+  )
   async updateDocument(
     @Param('id') id: string,
     @Body() updateDocumentDto: UpdateDocumentDto,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    return this.documentService.updateDocument(id, updateDocumentDto);
+    return this.documentService.updateDocument(id, updateDocumentDto, file);
   }
 
   @Delete(':id')
