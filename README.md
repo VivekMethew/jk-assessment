@@ -53,27 +53,34 @@ npm run test
 ## Auth management Features
 
 - Register User
-    User can register your self with putting input value that's required field email, password. then submit your. your will recieve a user detail.
+
+  User can register your self with putting input value that's required field email, password. then submit your. your will recieve a user detail.
+
 - Login
-    In this section user can login with username and password.
-    payload would be {email:string,password:string}. and then get response with user detail and access_token. Token will help to provide accessibility to access private endpoints
+  In this section user can login with username and password.
+  payload would be {email:string,password:string}. and then get response with user detail and access_token. Token will help to provide accessibility to access private endpoints
+
 - Jwt Authentication
-    We are following jwt authentication in this application and we are created JwtStrategy and JwtAuthGourd. That help to validate endpoint iiif user authorize or not for this endpoint.
+
+  We are following jwt authentication in this application and we are created JwtStrategy and JwtAuthGourd. That help to validate endpoint iiif user authorize or not for this endpoint.
+
 - Role based Authentication
-    We are creted role base authentication in this application and user have one of the role user can access private api's and some are the api's base user role. like - roles admin, editor, viewer.
-    Admin can adminstrate the endpoint and editor and viewer can you role base access perform.
+
+  We are creted role base authentication in this application and user have one of the role user can access private api's and some are the api's base user role. like - roles admin, editor, viewer.
+  Admin can adminstrate the endpoint and editor and viewer can you role base access perform.
 
 ## User management Features
 
 - Get All Users
-    This endpoint will help get all users list and this endpoint is protected route and admin can only access this features. and editor and viewer have get error forbidden.
+  This endpoint will help get all users list and this endpoint is protected route and admin can only access this features. and editor and viewer have get error forbidden.
 - Get Profile
-    A user can your profile but user must have to a any role he can get your profile detail.
-    Example - admin, editor, viewer.
+  A user can your profile but user must have to a any role he can get your profile detail.
+  Example - admin, editor, viewer.
 
 ## Document management Features
 
 - Upload documents
+
 - Read document content
 - CRUD operations
 
