@@ -66,7 +66,10 @@ npm run test
 ## User management Features
 
 - Get All Users
+    This endpoint will help get all users list and this endpoint is protected route and admin can only access this features. and editor and viewer have get error forbidden.
 - Get Profile
+    A user can your profile but user must have to a any role he can get your profile detail.
+    Example - admin, editor, viewer.
 
 ## Document management Features
 
